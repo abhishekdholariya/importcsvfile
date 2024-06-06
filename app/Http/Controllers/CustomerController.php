@@ -76,42 +76,8 @@ class CustomerController extends Controller
     //     }
     // }
 
-    // use a queue job 
-    // public function store(Request $request)
-    // {
-    //     $request->validate([
-    //         'import_csv' => 'required|mimes:csv|max:40000',
-    //     ]);
 
-    //     // read csv file and skip data
-    //     $file = $request->file('import_csv');
-    //     $handle = fopen($file->path(), 'r');
-
-    //     // skip the header row
-    //     fgetcsv($handle);
-
-    //     set_time_limit(0);
-
-    //     $chunksize = 3000;
-    //     while (!feof($handle)) {
-    //         $chunkdata = [];
-
-    //         for ($i = 0; $i < $chunksize; $i++) {
-    //             $data = fgetcsv($handle);
-    //             if ($data === false) {
-    //                 break;
-    //             }
-    //             $chunkdata[] = $data;
-    //         }
-
-    //         ImportCustomerData::dispatch($chunkdata);
-    //     }
-
-    //     fclose($handle);
-
-    //     return redirect()->route('home')->with('success', 'Data has been added successfully.');
-    // }
-
+    // useing queue
     public function store(Request $request)
     {
         $request->validate([
@@ -122,12 +88,11 @@ class CustomerController extends Controller
         $path = $file->getRealPath();
         $handle = fopen($path, 'r');
     
-        // Skip the header row
         fgetcsv($handle);
     
         set_time_limit(0);
     
-        $chunksize = 3000;
+        $chunksize = 5000;
         $chunkdata = [];
         $chunkCount = 0;
     

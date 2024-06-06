@@ -28,30 +28,6 @@ class ImportCustomerData implements ShouldQueue
     /**
      * Execute the job.
      */
-    // public function handle(): void
-    // {
-    //     $insertData = [];
-
-    //     foreach ($this->chunkData as $column) {
-    //         $insertData[] = [
-    //             'customer_id' => $column[1],
-    //             'fname' => $column[2],
-    //             'lname' => $column[3],
-    //             'company' => $column[4],
-    //             'city' => $column[5],
-    //             'country' => $column[6],
-    //             'phone_first' => $column[7],
-    //             'phone_second' => $column[8],
-    //             'email' => $column[9],
-    //             'subscription_date' => $column[10],
-    //             'website' => $column[11],
-    //             'created_at' => now(),
-    //             'updated_at' => now(),
-    //         ];
-    //     }
-
-    //     Customer::insert($insertData);
-    // }
     public function handle(): void
     {
         if (empty($this->chunkData)) {
